@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Color Selector</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            transition: background-color 0.5s ease;
+        }
+        .color-btn {
+            margin: 5px;
+            padding: 10px;
+            cursor: pointer;
+            border: none;
+            color: white;
+            font-size: 16px;
+        }
+        .red { background-color: red; }
+        .green { background-color: green; }
+        .blue { background-color: blue; }
+    </style>
+</head>
+<body>
+    <h2>Select Your Preferred Background Color</h2>
+    <button class="color-btn red" data-color="red">Red</button>
+    <button class="color-btn green" data-color="green">Green</button>
+    <button class="color-btn blue" data-color="blue">Blue</button>
+
+    <script>
+        // Function to apply the background color
+        function applyBackgroundColor(color) {
+            document.body.style.backgroundColor = color;
+        }
+
+        // Load saved background color from localStorage
+        window.onload = () => {
+            const savedColor = localStorage.getItem('bgColor');
+            if (savedColor) {
+                applyBackgroundColor(savedColor);
+            }
+        };
+
+        // Add event listeners to color buttons
+        const buttons = document.querySelectorAll('.color-btn');
+        buttons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const selectedColor = e.target.getAttribute('data-color');
+                applyBackgroundColor(selectedColor);
+                localStorage.setItem('bgColor', selectedColor); // Save color to localStorage
+            });
+        });
+    </script>
+</body>
+</html>
